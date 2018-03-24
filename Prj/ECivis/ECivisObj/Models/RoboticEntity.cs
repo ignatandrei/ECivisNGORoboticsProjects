@@ -16,7 +16,7 @@ namespace ECivisObj.Models
         public long Idcategory { get; set; }
         public string Description { get; set; }
         public long MemberCount { get; set; }
-        public int? Rating { get; set; }
+        public double? Rating { get; set; }
         public long IdcontactDetails { get; set; }
         public double? WomenPercentage { get; set; }
         public int? Sentiment { get; set; }
