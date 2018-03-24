@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace ECivisObj.Models
 {
@@ -14,7 +14,7 @@ namespace ECivisObj.Models
         { }
 
 
-        public RoboticEntDetails[] DetailsRobotics(int? IDCategory)
+        public async Task<RoboticEntDetails[]> DetailsRobotics(int? IDCategory)
         {
             IQueryable<RoboticEntity> robs = this.RoboticEntity;
             if (IDCategory != null)
@@ -22,14 +22,15 @@ namespace ECivisObj.Models
                 var cat = IDCategory.Value;
                 robs = robs.Where(it => it.Idcategory == cat);
             }
-            return robs.Select(it => new RoboticEntDetails()
+            var data= robs.Select(it => new RoboticEntDetails()
             {
+                Id = it.Id,
                 Name = it.Name,
                 Lat = it.IdaddressNavigation.Lat,
                 Long = it.IdaddressNavigation.Long
             })
-            .OrderBy(it => it.Name)
-            .ToArray();
+            .OrderBy(it => it.Name);
+            return await data.ToArrayAsync();
         }
     }
 }
