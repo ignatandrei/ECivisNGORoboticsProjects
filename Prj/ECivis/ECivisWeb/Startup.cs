@@ -24,7 +24,7 @@ namespace ECivisWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var connection = @"Server=.;Database=NGORobotics;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\MSSQLLocalDB;Database=NGORobotics;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<NGORoboticsContext>(options => options.UseSqlServer(connection));
 
         }
