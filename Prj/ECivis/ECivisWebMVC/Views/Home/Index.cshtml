@@ -4,11 +4,12 @@
 }
 
 <a href="/Admin"> Pagina de administrare</a>
-<ol>
+
+<ul>
     @foreach (var item in categories)
     {
-        <li>@item.Name  @item.Id</li>
-
+        <li>
+            <a href="/Home/ViewCategory/@item.Id">@item.Name</a>
+        </li>
     }
-</ol>
-du-te in Home/ViewCategory/id
+</ul>
