@@ -1,15 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var categories = ViewData["categories"] as List<ECivisObj.Models.Category>;
 }
 
-<a href="/Addresses">Adrese</a>
-<a href="/Admins">Administratori</a>
-<a href="/Categories">Categorii</a>
-<a href="/ContactDetails">Detalii contact</a>
-<a href="/Emails">E-mail</a>
-<a href="/NgoUsers">Utilizatori ONG</a>
-<a href="/PhoneNumbers">Numere de telefon</a>
-<a href="/Photos">Poze</a>
-<a href="/Projects">Proiecte</a>
-<a href="/RoboticEntities">Entitati</a>
-<a href="/Socials">Contact retele sociale</a>
+<a href="/Admin"> Pagina de administrare</a>
+<ol>
+    @foreach (var item in categories)
+    {
+        <li>@item.Name  @item.Id</li>
+
+    }
+</ol>
+du-te in Home/ViewCategory/id
