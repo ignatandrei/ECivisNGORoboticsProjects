@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECivisObj.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,6 +19,6 @@ namespace ECivisObj
         public string ContactDetails { get; set; }
         public double? WomenPercentage { get; set; }
         public int? Sentiment { get; set; }
-
+        public ICollection<Benefits> Benefits { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace ECivisObj.Models
     {
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Benefits> Benefits { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<ContactDetails> ContactDetails { get; set; }
         public virtual DbSet<Emails> Emails { get; set; }
@@ -51,6 +52,23 @@ namespace ECivisObj.Models
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(300);
+            });
+
+            modelBuilder.Entity<Benefits>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Description).HasMaxLength(1000);
+
+                entity.Property(e => e.IdroboticEntity).HasColumnName("IDRoboticEntity");
+
+                entity.Property(e => e.Name).HasMaxLength(200);
+
+                entity.HasOne(d => d.IdroboticEntityNavigation)
+                    .WithMany(p => p.Benefits)
+                    .HasForeignKey(d => d.IdroboticEntity)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Benefits_RoboticEntity");
             });
 
             modelBuilder.Entity<Category>(entity =>

@@ -7,6 +7,7 @@ namespace ECivisObj.Models
     {
         public RoboticEntity()
         {
+            Benefits = new HashSet<Benefits>();
             Photos = new HashSet<Photos>();
         }
 
@@ -24,6 +25,7 @@ namespace ECivisObj.Models
         public Address IdaddressNavigation { get; set; }
         public Category IdcategoryNavigation { get; set; }
         public ContactDetails IdcontactDetailsNavigation { get; set; }
+        public ICollection<Benefits> Benefits { get; set; }
         public ICollection<Photos> Photos { get; set; }
     }
 }
