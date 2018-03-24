@@ -1,15 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     var categories = ViewData["categories"] as List<ECivisObj.Models.Category>;
+    var robo = ViewData["allRobo"] as ECivisObj.RoboticEntDetails[];
 }
 
 <a href="/Admin"> Pagina de administrare</a>
 
+<a href="/">All robotics</a>
 <ul>
     @foreach (var item in categories)
     {
         <li>
-            <a href="/Home/ViewCategory/@item.Id">@item.Name</a>
+            <a href="/Home/Index/@item.Id">@item.Name</a>
         </li>
     }
 </ul>
+
+Sunt @robo.Length entitati in categoria @ViewData["search"]
+
+<table>
+    <thead>
+        <tr>
+            <td>Nume</td>
+        </tr>
+    </thead>
+    @foreach (var item in robo)
+    {
+        <tr>
+            <td>@item.Name</td>
+        </tr>
+
+    }
+</table>
