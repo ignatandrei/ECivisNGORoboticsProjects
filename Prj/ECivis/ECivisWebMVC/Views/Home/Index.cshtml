@@ -343,8 +343,10 @@ else
                     }).addTo(mymap);
 
                 @foreach (var item in robo) {
+                    var lat = item.Lat.ToString("##.#####").Replace(",", ".");
+                    var logit = item.Long.ToString("##.#####").Replace(",", ".");
                     <text>
-                L.marker([@item.Lat, @item.Long]).addTo(mymap)
+                L.marker([@lat, @logit]).addTo(mymap)
                     .bindPopup("<b>@item.Name</b><br />@item.Description").openPopup();
                 </text>
                  }
