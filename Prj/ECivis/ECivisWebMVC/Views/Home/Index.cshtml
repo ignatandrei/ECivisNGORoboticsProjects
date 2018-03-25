@@ -4,31 +4,74 @@
     var robo = ViewData["allRobo"] as ECivisObj.RoboticEntDetails[];
 }
 
-<a href="/Admin"> Pagina de administrare</a>
+<nav class="navbar navbar-default sidebar" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/">All Robotics<span style="font-size:16px;" class="pull-right hidden-xs showopacity"></span></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorii <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
 
-<a href="/">All robotics</a>
-<ul>
-    @foreach (var item in categories)
-    {
-        <li>
-            <a href="/Home/Index/@item.Id">@item.Name</a>
-        </li>
-    }
-</ul>
+                        @foreach (var item in categories)
+            {
+                <li>
+                    <a href="/Home/Index/@item.Id">@item.Name</a>
+                </li>
+}
+                    </ul>
+                </li>
+                <li><a href="/Admin">Administrare<span style="font-size:16px;" class="pull-right hidden-xs showopacity"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
 
 Sunt @robo.Length entitati in categoria @ViewData["search"]
-
-<table>
-    <thead>
-        <tr>
-            <td>Nume</td>
-        </tr>
-    </thead>
+<div class="">
+    <h3>Organizatii gasite:</h3>
     @foreach (var item in robo)
     {
-        <tr>
-            <td>@item.Name</td>
-        </tr>
-
+    <div class="">
+        <div class="">
+            <p><b>Nume:</b>&nbsp;@item.Name</p>
+            <p><b>Categorie:</b>&nbsp;@item.Category</p>
+            <p><b>Descriere</b><br /><span>@item.Description</span></p>
+            <p><b>Adresa:</b>&nbsp;@item.Address</p>
+            <p><b>Latitudine:</b>&nbsp;@item.Lat</p>
+            <p><b>Longitudine:</b>&nbsp;@item.Long</p>
+            <p><b>Detalii contact:</b><br /><span>@item.ContactDetails</span></p>
+            <p><b>Numar membri:</b>&nbsp;@item.MemberCount</p>
+            <p><b>% femei:</b>&nbsp;@item.WomenPercentage</p>
+            <p><b>Rating:</b>&nbsp;@item.Rating</p>
+            <p><b>Sentiment:</b>&nbsp;@item.Sentiment</p>
+            <p><b>Beneficii pentru femei:</b><br />
+                <ol>
+                    @foreach(var benefit in item.Benefits){
+                        <li><div><b>@benefit.Name</b></div>
+                            <div>@benefit.Description</div>
+                        </li>
+                    }
+                </ol>
+            </p>
+        </div>
+    </div>
     }
-</table>
+</div>
+            @*<td>
+                @foreach (var benefit in item.Benefits){
+                <ol>
+                    <li>@benefit.Name</li>
+                </ol>
+                }
+            </td>*@

@@ -22,12 +22,21 @@ namespace ECivisObj.Models
                 var cat = IDCategory.Value;
                 robs = robs.Where(it => it.Idcategory == cat);
             }
-            var data= robs.Select(it => new RoboticEntDetails()
+            var data = robs.Select(it => new RoboticEntDetails()
             {
                 Id = it.Id,
                 Name = it.Name,
                 Lat = it.IdaddressNavigation.Lat,
-                Long = it.IdaddressNavigation.Long
+                Long = it.IdaddressNavigation.Long,
+                MemberCount = it.MemberCount,
+                WomenPercentage = it.WomenPercentage,
+                Rating = it.Rating,
+                Sentiment = it.Sentiment,
+                Address = it.IdaddressNavigation.AddressDetails,
+                Description = it.Description,
+                Benefits = it.Benefits,
+                Category = it.IdcategoryNavigation.Name
+
             })
             .OrderBy(it => it.Name);
             return await data.ToArrayAsync();
