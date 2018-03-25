@@ -7,18 +7,17 @@ namespace ECivisObj.Models
     {
         public ContactDetails()
         {
+            PhoneNumbers = new HashSet<PhoneNumbers>();
             RoboticEntity = new HashSet<RoboticEntity>();
+            Social = new HashSet<Social>();
         }
 
         public long Id { get; set; }
-        public long? IdphoneNumbers { get; set; }
-        public long? Idemails { get; set; }
         public string Website { get; set; }
-        public long? Idsocial { get; set; }
 
-        public Emails IdemailsNavigation { get; set; }
-        public PhoneNumbers IdphoneNumbersNavigation { get; set; }
-        public Social IdsocialNavigation { get; set; }
+        public Emails IdNavigation { get; set; }
+        public ICollection<PhoneNumbers> PhoneNumbers { get; set; }
         public ICollection<RoboticEntity> RoboticEntity { get; set; }
+        public ICollection<Social> Social { get; set; }
     }
 }

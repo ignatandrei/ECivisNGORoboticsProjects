@@ -82,30 +82,17 @@ namespace ECivisObj.Models
 
             modelBuilder.Entity<ContactDetails>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Idemails).HasColumnName("IDEmails");
-
-                entity.Property(e => e.IdphoneNumbers).HasColumnName("IDPhoneNumbers");
-
-                entity.Property(e => e.Idsocial).HasColumnName("IDSocial");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Website).HasMaxLength(200);
 
-                entity.HasOne(d => d.IdemailsNavigation)
-                    .WithMany(p => p.ContactDetails)
-                    .HasForeignKey(d => d.Idemails)
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.ContactDetails)
+                    .HasForeignKey<ContactDetails>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ContactDetails_Emails");
-
-                entity.HasOne(d => d.IdphoneNumbersNavigation)
-                    .WithMany(p => p.ContactDetails)
-                    .HasForeignKey(d => d.IdphoneNumbers)
-                    .HasConstraintName("FK_ContactDetails_PhoneNumbers");
-
-                entity.HasOne(d => d.IdsocialNavigation)
-                    .WithMany(p => p.ContactDetails)
-                    .HasForeignKey(d => d.Idsocial)
-                    .HasConstraintName("FK_ContactDetails_Social");
             });
 
             modelBuilder.Entity<Emails>(entity =>
@@ -115,6 +102,8 @@ namespace ECivisObj.Models
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(200);
+
+                entity.Property(e => e.IdcontactDetails).HasColumnName("IDContactDetails");
 
                 entity.Property(e => e.Type)
                     .IsRequired()
@@ -140,9 +129,16 @@ namespace ECivisObj.Models
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.IdcontactDetails).HasColumnName("IDContactDetails");
+
                 entity.Property(e => e.PhoneNumber)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.HasOne(d => d.IdcontactDetailsNavigation)
+                    .WithMany(p => p.PhoneNumbers)
+                    .HasForeignKey(d => d.IdcontactDetails)
+                    .HasConstraintName("FK_PhoneNumbers_ContactDetails");
             });
 
             modelBuilder.Entity<Photos>(entity =>
@@ -218,9 +214,16 @@ namespace ECivisObj.Models
                     .IsRequired()
                     .HasMaxLength(300);
 
+                entity.Property(e => e.IdcontactDetails).HasColumnName("IDContactDetails");
+
                 entity.Property(e => e.Network)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.HasOne(d => d.IdcontactDetailsNavigation)
+                    .WithMany(p => p.Social)
+                    .HasForeignKey(d => d.IdcontactDetails)
+                    .HasConstraintName("FK_Social_ContactDetails");
             });
         }
     }
