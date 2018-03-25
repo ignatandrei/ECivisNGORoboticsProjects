@@ -23,6 +23,13 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a href="/TeamLeaders/Create">Adauga un lider de proiect</a>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdteamLeader" class="control-label"></label>
+                <select asp-for="IdteamLeader" class="form-control" asp-items="ViewBag.IdteamLeader"></select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>

@@ -21,7 +21,8 @@ namespace ECivisWebMVC.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Projects.ToListAsync());
+            var nGORoboticsContext = _context.Projects.Include(p => p.IdteamLeaderNavigation);
+            return View(await nGORoboticsContext.ToListAsync());
         }
 
         // GET: Projects/Details/5
@@ -33,6 +34,7 @@ namespace ECivisWebMVC.Controllers
             }
 
             var projects = await _context.Projects
+                .Include(p => p.IdteamLeaderNavigation)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (projects == null)
             {
@@ -45,6 +47,7 @@ namespace ECivisWebMVC.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
+            ViewData["IdteamLeader"] = new SelectList(_context.TeamLeaders, "Id", "FirstName");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace ECivisWebMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Projects projects)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,IdteamLeader")] Projects projects)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace ECivisWebMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdteamLeader"] = new SelectList(_context.TeamLeaders, "Id", "FirstName", projects.IdteamLeader);
             return View(projects);
         }
 
@@ -77,6 +81,7 @@ namespace ECivisWebMVC.Controllers
             {
                 return NotFound();
             }
+            ViewData["IdteamLeader"] = new SelectList(_context.TeamLeaders, "Id", "FirstName", projects.IdteamLeader);
             return View(projects);
         }
 
@@ -85,7 +90,7 @@ namespace ECivisWebMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Description")] Projects projects)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Description,IdteamLeader")] Projects projects)
         {
             if (id != projects.Id)
             {
@@ -112,6 +117,7 @@ namespace ECivisWebMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdteamLeader"] = new SelectList(_context.TeamLeaders, "Id", "FirstName", projects.IdteamLeader);
             return View(projects);
         }
 
@@ -124,6 +130,7 @@ namespace ECivisWebMVC.Controllers
             }
 
             var projects = await _context.Projects
+                .Include(p => p.IdteamLeaderNavigation)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (projects == null)
             {

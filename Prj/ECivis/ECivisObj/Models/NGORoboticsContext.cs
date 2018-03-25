@@ -18,6 +18,7 @@ namespace ECivisObj.Models
         public virtual DbSet<Projects> Projects { get; set; }
         public virtual DbSet<RoboticEntity> RoboticEntity { get; set; }
         public virtual DbSet<Social> Social { get; set; }
+        public virtual DbSet<TeamLeaders> TeamLeaders { get; set; }
 
         // Unable to generate entity type for table 'dbo.RoboticEntityProjects'. Please see the warning messages.
 
@@ -169,7 +170,15 @@ namespace ECivisObj.Models
 
                 entity.Property(e => e.Description).HasMaxLength(1000);
 
+                entity.Property(e => e.IdteamLeader).HasColumnName("IDTeamLeader");
+
                 entity.Property(e => e.Name).HasMaxLength(150);
+
+                entity.HasOne(d => d.IdteamLeaderNavigation)
+                    .WithMany(p => p.Projects)
+                    .HasForeignKey(d => d.IdteamLeader)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Projects_TeamLeaders");
             });
 
             modelBuilder.Entity<RoboticEntity>(entity =>
@@ -226,6 +235,19 @@ namespace ECivisObj.Models
                     .HasForeignKey(d => d.IdcontactDetails)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Social_ContactDetails");
+            });
+
+            modelBuilder.Entity<TeamLeaders>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
         }
     }
