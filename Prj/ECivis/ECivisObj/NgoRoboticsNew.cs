@@ -22,7 +22,11 @@ namespace ECivisObj.Models
                 var cat = IDCategory.Value;
                 robs = robs.Where(it => it.Idcategory == cat);
             }
-            var data = robs.Select(it => new RoboticEntDetails()
+            var data = robs
+                .Include(it=>it.IdcontactDetailsNavigation.Social)
+                .Include(it => it.IdcontactDetailsNavigation.IdNavigation)
+                .Include(it=>it.IdcontactDetailsNavigation.PhoneNumbers)
+                .Select(it => new RoboticEntDetails()
             {
                 Id = it.Id,
                 Name = it.Name,
@@ -35,8 +39,8 @@ namespace ECivisObj.Models
                 Address = it.IdaddressNavigation.AddressDetails,
                 Description = it.Description,
                 Benefits = it.Benefits,
-                Category = it.IdcategoryNavigation.Name
-
+                Category = it.IdcategoryNavigation.Name,
+                ContactDetails = it.IdcontactDetailsNavigation
             })
             .OrderBy(it => it.Name);
             return await data.ToArrayAsync();

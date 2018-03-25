@@ -16,7 +16,7 @@ namespace ECivisObj
         public string Description { get; set; }
         public long MemberCount { get; set; }
         public double? Rating { get; set; }
-        public string ContactDetails { get; set; }
+        public ContactDetails ContactDetails { get; set; }
         public double? WomenPercentage { get; set; }
         public int? Sentiment { get; set; }
         public ICollection<Benefits> Benefits { get; set; }
