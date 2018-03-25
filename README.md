@@ -2,24 +2,25 @@
 ECivisNGORoboticsProjects
 
 
-#Features:
+# Features:
 
-##Map with pins
+## Map with pins
 
-##Search after categories
+## Search after categories
 
-##Admin interface
+## Admin interface
 
-#Done with
+# Done with
 
-##Database: Sqlite ( can be SqlServer, Oracle, name it)
+## Database: Sqlite ( can be SqlServer, Oracle, name it)
 https://www.sqlite.org/index.html
 
-##Language C#
+## Language C#
 https://github.com/dotnet
 
-##Framework : ASP.NET Core MVC
+## Framework : ASP.NET Core MVC
 https://github.com/aspnet/
+
 
 
 
