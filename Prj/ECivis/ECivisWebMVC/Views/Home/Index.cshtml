@@ -346,15 +346,22 @@ else
                     var lat = item.Lat.ToString("##.#####").Replace(",", ".");
                     var logit = item.Long.ToString("##.#####").Replace(",", ".");
                     <text>
-                L.marker([@lat, @logit]).addTo(mymap)
-                    .bindPopup("<b>@item.Name</b><br />@item.Description").openPopup();
+                var x= L.marker([@lat, @logit]).addTo(mymap)
+                    .bindPopup("<b>@item.Name</b><br />@item.Description");
+                @if (item.WomenPercentage > 49)
+                {
+                    <text>
+                    L.circle([@lat, @logit], 20, {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5
+                    }).addTo(mymap).bindPopup("woman");
+                    </text>
+
+                }
                 </text>
                  }
-                //L.circle([51.508, -0.11], 500, {
-                //    color: 'red',
-                //    fillColor: '#f03',
-                //    fillOpacity: 0.5
-                //}).addTo(mymap).bindPopup("I am a circle.");
+                
 
                 //L.polygon([
 

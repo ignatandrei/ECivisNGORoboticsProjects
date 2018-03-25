@@ -8,6 +8,8 @@ ECivisNGORoboticsProjects
 
 ## Search after categories
 
+## Show women percentage > 49 as red
+
 ## Admin interface
 
 # Done with
