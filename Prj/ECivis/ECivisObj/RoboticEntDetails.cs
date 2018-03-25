@@ -20,5 +20,6 @@ namespace ECivisObj
         public double? WomenPercentage { get; set; }
         public int? Sentiment { get; set; }
         public ICollection<Benefits> Benefits { get; set; }
+        public ICollection<Photos> Photos { get; set; }
     }
 }

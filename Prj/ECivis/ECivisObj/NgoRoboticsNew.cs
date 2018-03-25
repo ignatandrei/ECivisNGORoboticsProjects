@@ -23,24 +23,25 @@ namespace ECivisObj.Models
                 robs = robs.Where(it => it.Idcategory == cat);
             }
             var data = robs
-                .Include(it=>it.IdcontactDetailsNavigation.Social)
+                .Include(it => it.IdcontactDetailsNavigation.Social)
                 .Include(it => it.IdcontactDetailsNavigation.IdNavigation)
-                .Include(it=>it.IdcontactDetailsNavigation.PhoneNumbers)
+                .Include(it => it.IdcontactDetailsNavigation.PhoneNumbers)
                 .Select(it => new RoboticEntDetails()
-            {
-                Id = it.Id,
-                Name = it.Name,
-                Lat = it.IdaddressNavigation.Lat,
-                Long = it.IdaddressNavigation.Long,
-                MemberCount = it.MemberCount,
-                WomenPercentage = it.WomenPercentage,
-                Rating = it.Rating,
-                Sentiment = it.Sentiment,
-                Address = it.IdaddressNavigation.AddressDetails,
-                Description = it.Description,
-                Benefits = it.Benefits,
-                Category = it.IdcategoryNavigation.Name,
-                ContactDetails = it.IdcontactDetailsNavigation
+                {
+                    Id = it.Id,
+                    Name = it.Name,
+                    Lat = it.IdaddressNavigation.Lat,
+                    Long = it.IdaddressNavigation.Long,
+                    MemberCount = it.MemberCount,
+                    WomenPercentage = it.WomenPercentage,
+                    Rating = it.Rating,
+                    Sentiment = it.Sentiment,
+                    Address = it.IdaddressNavigation.AddressDetails,
+                    Description = it.Description,
+                    Benefits = it.Benefits,
+                    Category = it.IdcategoryNavigation.Name,
+                    ContactDetails = it.IdcontactDetailsNavigation,
+                    Photos = it.Photos
             })
             .OrderBy(it => it.Name);
             return await data.ToArrayAsync();
