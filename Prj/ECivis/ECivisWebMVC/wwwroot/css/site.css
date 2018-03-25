@@ -33,3 +33,41 @@
         display: none;
     }
 }
+
+.countEntities{
+    margin: 10px auto 10px 20px;
+}
+
+.accordion-group .accordion {
+    border-radius: 5px;
+    border-color: #EEEEEE;
+    padding: 0;
+    width: 97%;
+}
+
+.accordion-default > .accordion-heading {
+    color: #808080;
+    background-color: #EEE;
+    border-color: #EEEEEE;
+}
+
+.accordion-title {
+    font-size: 14px;
+}
+
+    .accordion-title > a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+    }
+
+.short-full {
+    float: right;
+    color: #0000AA;
+}
+
+.accordion-default > .accordion-heading + .accordion-collapse > .accordion-body {
+    border: solid 1px #EEEEEE;
+    background-color: #FFFFFF;
+    padding: 5px 10px 5px;
+}
