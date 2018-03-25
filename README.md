@@ -1,6 +1,8 @@
 # ECivisNGORoboticsProjects
 ECivisNGORoboticsProjects
 
+![alt text](https://raw.githubusercontent.com/ignatandrei/ECivisNGORoboticsProjects/master/firstPage.PNG?raw=true "First Page")
+
 
 # Features:
 
