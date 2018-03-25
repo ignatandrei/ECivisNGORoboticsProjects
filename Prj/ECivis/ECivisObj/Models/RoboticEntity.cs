@@ -27,5 +27,6 @@ namespace ECivisObj.Models
         public ContactDetails IdcontactDetailsNavigation { get; set; }
         public ICollection<Benefits> Benefits { get; set; }
         public ICollection<Photos> Photos { get; set; }
+        public ICollection<Projects> Projects { get; set; }
     }
 }

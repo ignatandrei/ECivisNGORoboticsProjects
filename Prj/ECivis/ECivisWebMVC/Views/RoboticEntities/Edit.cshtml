@@ -22,7 +22,6 @@
                 <label asp-for="Idaddress" class="control-label"></label>
                 <select asp-for="Idaddress" class="form-control" asp-items="ViewBag.Idaddress"></select>
                 <span asp-validation-for="Idaddress" class="text-danger"></span>
-                <p><a href="" id="AddressModify">Modifica adresa</a></p>
             </div>
             <div class="form-group">
                 <label asp-for="Idcategory" class="control-label"></label>
@@ -48,7 +47,6 @@
                 <label asp-for="IdcontactDetails" class="control-label"></label>
                 <select asp-for="IdcontactDetails" class="form-control" asp-items="ViewBag.IdcontactDetails"></select>
                 <span asp-validation-for="IdcontactDetails" class="text-danger"></span>
-                <p><a href="" id="ContactModify">Modifica detaliile de contact</a></p>
             </div>
             <div class="form-group">
                 <label asp-for="WomenPercentage" class="control-label"></label>
@@ -70,19 +68,6 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-<script type="text/javascript">
-    function replaceHrefBySelect(DOMelementID, newHref) {
-        var contactId = $("#" + DOMelementID).get(0).options;
-        var hrefWithId = newHref + contactId;
-        document.getElementById(DOMelementID).href = hrefWithId;
-        console.log(hrefWithId);
-    }
-
-    replaceHrefBySelect("AddressModify", "/Addresses/Edit/");
-    replaceHrefBySelect("ContactModify", "/ContactDetails/Edit/");
-
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
