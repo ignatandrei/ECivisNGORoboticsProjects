@@ -21,7 +21,7 @@ namespace ECivisWebMVC.Controllers
         // GET: ContactDetails
         public async Task<IActionResult> Index()
         {
-            var nGORoboticsContext = _context.ContactDetails.Include(c => c.IdemailsNavigation).Include(c => c.IdphoneNumbersNavigation).Include(c => c.IdsocialNavigation);
+            var nGORoboticsContext = _context.ContactDetails.Include(c => c.IdNavigation);
             return View(await nGORoboticsContext.ToListAsync());
         }
 
@@ -34,9 +34,7 @@ namespace ECivisWebMVC.Controllers
             }
 
             var contactDetails = await _context.ContactDetails
-                .Include(c => c.IdemailsNavigation)
-                .Include(c => c.IdphoneNumbersNavigation)
-                .Include(c => c.IdsocialNavigation)
+                .Include(c => c.IdNavigation)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (contactDetails == null)
             {
@@ -49,9 +47,7 @@ namespace ECivisWebMVC.Controllers
         // GET: ContactDetails/Create
         public IActionResult Create()
         {
-            ViewData["Idemails"] = new SelectList(_context.Emails, "Id", "Email");
-            ViewData["IdphoneNumbers"] = new SelectList(_context.PhoneNumbers, "Id", "PhoneNumber");
-            ViewData["Idsocial"] = new SelectList(_context.Social, "Id", "Address");
+            ViewData["Id"] = new SelectList(_context.Emails, "Id", "Email");
             return View();
         }
 
@@ -60,7 +56,7 @@ namespace ECivisWebMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdphoneNumbers,Idemails,Website,Idsocial")] ContactDetails contactDetails)
+        public async Task<IActionResult> Create([Bind("Id,Website")] ContactDetails contactDetails)
         {
             if (ModelState.IsValid)
             {
@@ -68,9 +64,7 @@ namespace ECivisWebMVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idemails"] = new SelectList(_context.Emails, "Id", "Email", contactDetails.Idemails);
-            ViewData["IdphoneNumbers"] = new SelectList(_context.PhoneNumbers, "Id", "PhoneNumber", contactDetails.IdphoneNumbers);
-            ViewData["Idsocial"] = new SelectList(_context.Social, "Id", "Address", contactDetails.Idsocial);
+            ViewData["Id"] = new SelectList(_context.Emails, "Id", "Email", contactDetails.Id);
             return View(contactDetails);
         }
 
@@ -87,9 +81,7 @@ namespace ECivisWebMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idemails"] = new SelectList(_context.Emails, "Id", "Email", contactDetails.Idemails);
-            ViewData["IdphoneNumbers"] = new SelectList(_context.PhoneNumbers, "Id", "PhoneNumber", contactDetails.IdphoneNumbers);
-            ViewData["Idsocial"] = new SelectList(_context.Social, "Id", "Address", contactDetails.Idsocial);
+            ViewData["Id"] = new SelectList(_context.Emails, "Id", "Email", contactDetails.Id);
             return View(contactDetails);
         }
 
@@ -98,7 +90,7 @@ namespace ECivisWebMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,IdphoneNumbers,Idemails,Website,Idsocial")] ContactDetails contactDetails)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Website")] ContactDetails contactDetails)
         {
             if (id != contactDetails.Id)
             {
@@ -125,9 +117,7 @@ namespace ECivisWebMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idemails"] = new SelectList(_context.Emails, "Id", "Email", contactDetails.Idemails);
-            ViewData["IdphoneNumbers"] = new SelectList(_context.PhoneNumbers, "Id", "PhoneNumber", contactDetails.IdphoneNumbers);
-            ViewData["Idsocial"] = new SelectList(_context.Social, "Id", "Address", contactDetails.Idsocial);
+            ViewData["Id"] = new SelectList(_context.Emails, "Id", "Email", contactDetails.Id);
             return View(contactDetails);
         }
 
@@ -140,9 +130,7 @@ namespace ECivisWebMVC.Controllers
             }
 
             var contactDetails = await _context.ContactDetails
-                .Include(c => c.IdemailsNavigation)
-                .Include(c => c.IdphoneNumbersNavigation)
-                .Include(c => c.IdsocialNavigation)
+                .Include(c => c.IdNavigation)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (contactDetails == null)
             {

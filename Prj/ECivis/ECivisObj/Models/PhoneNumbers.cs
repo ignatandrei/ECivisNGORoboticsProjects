@@ -7,7 +7,7 @@ namespace ECivisObj.Models
     {
         public long Id { get; set; }
         public string PhoneNumber { get; set; }
-        public long? IdcontactDetails { get; set; }
+        public long IdcontactDetails { get; set; }
 
         public ContactDetails IdcontactDetailsNavigation { get; set; }
     }

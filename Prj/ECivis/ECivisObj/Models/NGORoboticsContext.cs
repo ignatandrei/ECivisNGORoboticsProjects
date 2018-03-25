@@ -138,6 +138,7 @@ namespace ECivisObj.Models
                 entity.HasOne(d => d.IdcontactDetailsNavigation)
                     .WithMany(p => p.PhoneNumbers)
                     .HasForeignKey(d => d.IdcontactDetails)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PhoneNumbers_ContactDetails");
             });
 
@@ -223,6 +224,7 @@ namespace ECivisObj.Models
                 entity.HasOne(d => d.IdcontactDetailsNavigation)
                     .WithMany(p => p.Social)
                     .HasForeignKey(d => d.IdcontactDetails)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Social_ContactDetails");
             });
         }
